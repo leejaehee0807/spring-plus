@@ -1,4 +1,4 @@
-package org.example.expert.domain.common.dto;
+package org.example.expert.config;
 
 import lombok.Getter;
 import org.example.expert.domain.user.enums.UserRole;
@@ -9,18 +9,12 @@ import java.util.List;
 
 @Getter
 public class AuthUser {
-
-    private final Long id;
+    private final String userId;
     private final String email;
-    private final UserRole userRole;
-    private final String nickName;
     private final Collection<? extends GrantedAuthority> authorities;
-
-    public AuthUser(Long id, String email, UserRole userRole, String nickName) {
-        this.id = id;
+    public AuthUser(String userId, String email, UserRole role) {
+        this.userId = userId;
         this.email = email;
-        this.userRole = userRole;
-        this.nickName = nickName;
-        this.authorities = List.of(new SimpleGrantedAuthority(userRole.name()));
+        this.authorities = List.of(new SimpleGrantedAuthority(role.name()));
     }
 }
